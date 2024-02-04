@@ -17,7 +17,7 @@ resource "proxmox_vm_qemu" "auto-vm" {
     full_clone = true
 
     # VM System Settings
-    agent = 1
+    agent = 0
     
     # VM CPU Settings
     cores = 1
@@ -53,7 +53,6 @@ resource "proxmox_vm_qemu" "auto-vm" {
     os_type = "cloud-init"
     cloudinit_cdrom_storage = "local-lvm"
     
-
     ciuser = var.ci_user
     cipassword = var.ci_password
     # sshkeys = var.sshkeys
