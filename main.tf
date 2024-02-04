@@ -13,11 +13,11 @@ resource "proxmox_vm_qemu" "auto-vm" {
     onboot = true 
 
     # VM OS Settings
-    clone = "ubuntu-22"
+    clone = "ubuntu-template"
     full_clone = true
 
     # VM System Settings
-    agent = 0
+    agent = 1
     
     # VM CPU Settings
     cores = 1
@@ -42,7 +42,7 @@ resource "proxmox_vm_qemu" "auto-vm" {
       scsi {
         scsi0 {
             disk {
-            size = 20
+            size = 25
             storage = "local-lvm"
           }
         }
