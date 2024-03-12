@@ -3,11 +3,11 @@
 # Create a new VM from a clone
 
 resource "proxmox_vm_qemu" "auto-vm" {
-    
+    count = var.vm_count
     # VM General Settings
     target_node = "pve-server"
-    vmid = "102"
-    name = "vm-coba"
+    vmid = 200 +(count.index +1)
+    name = "vm-sija-${count.index +1}"
 
     # VM Advanced General Settings
     onboot = true 
@@ -62,4 +62,13 @@ resource "proxmox_vm_qemu" "auto-vm" {
         network
        ]
     }
+}
+
+output "vm_info" {
+  value = [
+    for vm in proxmox_vm_qemu.auto-vm:{
+      hostname = vm.name
+      ip-addr = vm.default_ipv4_address
+    }
+  ]
 }

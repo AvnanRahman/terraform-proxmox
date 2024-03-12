@@ -25,7 +25,7 @@ variable "sshkeys" {
   type = string
 }
 
-variable "count" {
+variable "vm_count" {
   type = number
   default = 3
 }
