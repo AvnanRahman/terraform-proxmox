@@ -21,6 +21,11 @@ variable "ci_password" {
   sensitive = true
 }
 
-# variable "sshkeys" {
-#   type = string
-# }
+variable "sshkeys" {
+  type = string
+}
+
+variable "count" {
+  type = number
+  default = 3
+}

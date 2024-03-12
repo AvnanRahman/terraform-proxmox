@@ -5,3 +5,7 @@ proxmox_api_token_secret = "Secret"
 #Cloud Init Config
 ci_user = "ubuntu"
 ci_password = "Admin123"
+sshkeys = <<EOF
+Private key mesin 1
+Private key mesin 1
+EOF
