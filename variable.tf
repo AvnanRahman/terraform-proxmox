@@ -27,7 +27,7 @@ variable "sshkeys" {
 variable "target_node" {
   type = list(string)
   description = "Daftar node Proxmox."
-  default = [ "pve-server1", "pve-server2" ]
+  default = [ "pve-server" ]
 }
 
 variable "instance_name" {
@@ -42,4 +42,16 @@ variable "vm_id" {
 variable "vm_count" {
   type = number
   description = "Masukkan jumlah VM yang ingin Anda buat, misalnya: 3."
+}
+
+variable "network_gateway" {
+  type = string
+  description = "IP gateway untuk network."
+  default = "172.19.255.254"
+}
+
+variable "dns_servers" {
+  type = list(string)
+  description = "Daftar DNS servers."
+  default = ["8.8.8.8", "8.8.4.4"]
 }

@@ -2,11 +2,6 @@
 # ---
 # Create a new VM from a clone
 
-# locals {
-#   formatted_name = lower(var.instance_name)
-#   target_node = var.target_node[count.index % length(var.target_node)]
-# }
-
 resource "proxmox_vm_qemu" "auto-vm" {
     count = var.vm_count
     # VM General Settings
@@ -37,7 +32,10 @@ resource "proxmox_vm_qemu" "auto-vm" {
         bridge = "vmbr1"
         model  = "virtio"
     }
-    ipconfig0 = "ip=dhcp"
+    ipconfig0 = format("ip=%s/24,gw=%s", 
+                  cidrhost("172.19.255.50/24", 100 + count.index), 
+                  var.network_gateway)
+    nameserver = join(" ", var.dns_servers)
 
     # VM Disk Settings
     bootdisk = "scsi0"
