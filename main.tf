@@ -74,6 +74,7 @@ output "vm_info" {
     for vm in proxmox_vm_qemu.auto-vm:{
       hostname = vm.name
       ip-addr = vm.default_ipv4_address
+      node     = vm.target_node
     }
   ]
 }
