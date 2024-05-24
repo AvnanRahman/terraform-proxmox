@@ -2,10 +2,15 @@
 # ---
 # Create a new VM from a clone
 
+# locals {
+#   formatted_name = lower(var.instance_name)
+#   target_node = var.target_node[count.index % length(var.target_node)]
+# }
+
 resource "proxmox_vm_qemu" "auto-vm" {
     count = var.vm_count
     # VM General Settings
-    target_node = var.target_node
+    target_node = var.target_node[count.index % length(var.target_node)]
     vmid = var.vm_id + count.index
     name = format("%s-%d", lower(var.instance_name), count.index +1)
 

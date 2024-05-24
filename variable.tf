@@ -25,8 +25,9 @@ variable "sshkeys" {
   type = string
 }
 variable "target_node" {
-  type = string
-  description = "Masukkan target node:"
+  type = list(string)
+  description = "Daftar node Proxmox."
+  default = [ "pve-server1", "pve-server2" ]
 }
 
 variable "instance_name" {
