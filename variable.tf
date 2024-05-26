@@ -27,13 +27,20 @@ variable "sshkeys" {
 variable "target_node" {
   type = list(string)
   description = "Daftar node Proxmox."
-  default = [ "pve-server" ]
+  default = [ "pve-server", "pve2" ]
 }
 
 variable "instance_name" {
   type = string
   description = "Masukkan nama awal untuk VM:"
 }
+
+variable "image" {
+  type = list(string)
+  description = "Daftar image template sesuai node."
+  default = [ "ubuntu-22", "image2"]
+}
+
 variable "vm_id" {
   type = number
   description = "Masukkan nilai VM ID instance pertama:"

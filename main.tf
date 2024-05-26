@@ -13,7 +13,7 @@ resource "proxmox_vm_qemu" "auto-vm" {
     onboot = true 
 
     # VM OS Settings
-    clone = "ubuntu-22"
+    clone = var.image[count.index % length(var.image)]
     full_clone = true
 
     # VM System Settings
