@@ -33,7 +33,7 @@ resource "proxmox_vm_qemu" "auto-vm" {
         model  = "virtio"
     }
     ipconfig0 = format("ip=%s/24,gw=%s", 
-                  cidrhost("172.19.255.50/24", 100 + count.index), 
+                  cidrhost("172.19.255.0/24", 100 + count.index), 
                   var.network_gateway)
     nameserver = join(" ", var.dns_servers)
 

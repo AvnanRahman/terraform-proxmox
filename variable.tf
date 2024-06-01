@@ -44,11 +44,19 @@ variable "image" {
 variable "vm_id" {
   type = number
   description = "Masukkan nilai VM ID instance pertama:"
+  validation {
+    condition     = var.vm_id > 0
+    error_message = "Nilai VM ID (vm_id) harus berupa angka positif yang lebih besar dari 0."
+  }
 }
 
 variable "vm_count" {
   type = number
   description = "Masukkan jumlah VM yang ingin Anda buat, misalnya: 3."
+  validation {
+    condition     = var.vm_count > 0
+    error_message = "Jumlah VM (vm_count) harus berupa angka positif yang lebih besar dari 0."
+  }
 }
 
 variable "network_gateway" {
