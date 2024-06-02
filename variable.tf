@@ -16,18 +16,13 @@ variable "ci_user" {
   type = string
 }
 
-variable "ci_password" {
-  type = string
-  sensitive = true
-}
-
 variable "sshkeys" {
   type = string
 }
 variable "target_node" {
   type = list(string)
   description = "Daftar node Proxmox."
-  default = [ "pve-server", "pve2" ]
+  default = [ "pve-server" ]
 }
 
 variable "instance_name" {
@@ -38,7 +33,7 @@ variable "instance_name" {
 variable "image" {
   type = list(string)
   description = "Daftar image template sesuai node."
-  default = [ "ubuntu-22", "image2"]
+  default = [ "ubuntu-22"]
 }
 
 variable "vm_id" {
