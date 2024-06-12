@@ -12,6 +12,10 @@ variable "proxmox_api_token_secret" {
     sensitive = true
 }
 
+variable "batch" {
+  type = number
+}
+
 variable "ci_user" {
   type = string
 }
@@ -52,6 +56,11 @@ variable "vm_count" {
     condition     = var.vm_count > 0
     error_message = "Jumlah VM (vm_count) harus berupa angka positif yang lebih besar dari 0."
   }
+}
+
+variable "vm_ip" {
+  type = number
+  description = "Masukkan IP Address VM pertama, cukup masukan IP Host dari network 172.19.255.0/24."
 }
 
 variable "network_gateway" {

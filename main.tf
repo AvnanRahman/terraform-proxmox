@@ -30,7 +30,7 @@ resource "proxmox_vm_qemu" "auto-vm" {
     cpu = "kvm64"    
     
     # VM Memory Settings
-    memory = 1024
+    memory = 512
 
     # VM Network Settings
     network {
@@ -38,7 +38,7 @@ resource "proxmox_vm_qemu" "auto-vm" {
         model  = "virtio"
     }
     ipconfig0 = format("ip=%s/24,gw=%s", 
-                  cidrhost("172.19.255.0/24", 100 + count.index), 
+                  cidrhost("172.19.255.0/24", var.vm_ip + count.index), 
                   var.network_gateway)
     nameserver = join(" ", var.dns_servers)
 
@@ -50,7 +50,7 @@ resource "proxmox_vm_qemu" "auto-vm" {
       scsi {
         scsi0 {
             disk {
-            size = 25
+            size = 10
             storage = "local-lvm"
           }
         }
@@ -100,5 +100,5 @@ resource "local_file" "vm_info" {
     for vm in proxmox_vm_qemu.auto-vm : format("Hostname: %s, IP: %s, Node: %s, Password: %s", 
     vm.name, vm.default_ipv4_address, vm.target_node, vm.cipassword)
   ])
-  filename = "/home/ubuntu/auto-vm/vm_info.txt"
+  filename = "/home/ubuntu/terraform-proxmox/{var.batch}/vm_info.txt"
 }

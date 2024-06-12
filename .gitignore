@@ -4,3 +4,4 @@
 variable.auto.tfvars
 terraform.tfstate.backup
 terraform.tfstate
+terraform_batch*
