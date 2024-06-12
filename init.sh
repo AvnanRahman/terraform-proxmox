@@ -2,7 +2,7 @@
 # Jumlah total VM yang ingin dibuat
 TOTAL_VM=36
 # Jumlah VM per folder
-VM_PER_FOLDER=6
+VM_PER_FOLDER=6 # Max 6, jangan dirubah
 # Nama folder dasar
 FOLDER_BASE="/home/ubuntu/terraform-proxmox"
 FOLDER_BATCH="terraform_batch"

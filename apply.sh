@@ -2,7 +2,7 @@
 # Jumlah total VM yang ingin dibuat
 TOTAL_VM=12
 # Jumlah VM per folder
-VM_PER_FOLDER=2
+VM_PER_FOLDER=2 # Max 6, jangan dirubah
 # Variabel VM
 VM_NAME="vm-batch"
 VM_ID=200
