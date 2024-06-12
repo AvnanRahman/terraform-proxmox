@@ -100,5 +100,5 @@ resource "local_file" "vm_info" {
     for vm in proxmox_vm_qemu.auto-vm : format("Hostname: %s, IP: %s, Node: %s, Password: %s", 
     vm.name, vm.default_ipv4_address, vm.target_node, vm.cipassword)
   ])
-  filename = "/home/ubuntu/terraform-proxmox/{var.batch}/vm_info.txt"
+  filename = "/home/ubuntu/terraform-proxmox/${var.batch}/vm_info.txt"
 }
