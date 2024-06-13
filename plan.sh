@@ -1,19 +1,25 @@
 #!/bin/bash
-# Jumlah total VM yang ingin dibuat
-TOTAL_VM=12
+##--- Variabel yang tidak perlu dirubah ---##
 # Jumlah VM per folder
-VM_PER_FOLDER=2 # Max 6, jangan dirubah
+VM_PER_FOLDER=6 # Max 6, jangan dirubah
+# Nama folder dasar
+FOLDER_BASE="/home/ubuntu/terraform-proxmox"
+FOLDER_BATCH="terraform_batch"
+##-----------------------------------------##
+##--- Variabel yang perlu dirubah ---##
+# Jumlah total VM yang sudah dibuat
+TOTAL_VM=18
 # Variabel VM
 VM_NAME="vm-batch"
 VM_ID=200
 VM_IP=100 # Digit ke-4 dari network IP
-# Nama folder dasar
-FOLDER_BASE="/home/ubuntu/terraform-proxmox"
-FOLDER_BATCH="terraform_batch"
+##-----------------------------------------##
 
+# Hitung jumlah batch yang diperlukan
+NUM_BATCHES=$(( (TOTAL_VM + VM_PER_FOLDER - 1) / VM_PER_FOLDER ))
 
-# Loop untuk menjalankan terraform apply di setiap folder
-for i in $(seq 0 $((TOTAL_VM / VM_PER_FOLDER - 1)))
+# Loop untuk menjalankan terraform plan di setiap folder
+for i in $(seq 0 $((NUM_BATCHES - 1)))
 do
   # Tentukan nama folder
   FOLDER_NAME="${FOLDER_BATCH}_$((i+1))"
@@ -27,9 +33,16 @@ do
   # Start vm_ip untuk batch ini
   VM_BATCH_IP=$((${VM_IP} + i * VM_PER_FOLDER))
 
+  # Hitung jumlah VM untuk batch ini
+  if [ $((i + 1)) -eq $NUM_BATCHES ]; then
+    VM_BATCH_COUNT=$((TOTAL_VM - i * VM_PER_FOLDER))
+  else
+    VM_BATCH_COUNT=$VM_PER_FOLDER
+  fi
+
   # Masuk ke folder
   cd "${FOLDER_BASE}/${FOLDER_NAME}"
 
   # Jalankan terraform apply dengan variabel yang ditetapkan dari baris perintah
-  terraform plan -var "instance_name=${VM_BATCH_NAME}" -var "vm_count=${VM_PER_FOLDER}" -var "vm_id=${VM_ID_START}" -var "vm_ip=${VM_IP}" -var "batch=${i}"
+  terraform plan -var "instance_name=${VM_BATCH_NAME}" -var "vm_count=${VM_BATCH_COUNT}" -var "vm_id=${VM_BATCH_ID}" -var "vm_ip=${VM_BATCH_IP}" -var "batch=${i}"
 done
