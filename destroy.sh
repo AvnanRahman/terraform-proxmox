@@ -47,7 +47,7 @@ do
   cd "${FOLDER_BASE}/${FOLDER_NAME}"
 
   # Jalankan terraform apply dengan variabel yang ditetapkan dari baris perintah
-  terraform destroy --auto-approve -var "instance_name=${VM_BATCH_NAME}" -var "vm_count=${VM_BATCH_COUNT}" -var "vm_id=${VM_BATCH_ID}" -var "vm_ip=${VM_BATCH_IP}" -var "batch=${i}" -var "vm_cpu=${VM_CORE}" -var "vm_memory=${VM_MEMORY}" -var "vm_disk=${VM_DISK}"
+  terraform destroy --auto-approve -var "instance_name=${VM_BATCH_NAME}" -var "vm_count=${VM_BATCH_COUNT}" -var "vm_id=${VM_BATCH_ID}" -var "vm_ip=${VM_BATCH_IP}" -var "batch=$((i+1))" -var "vm_cpu=${VM_CORE}" -var "vm_memory=${VM_MEMORY}" -var "vm_disk=${VM_DISK}"
 
   # Cleanup Folder
   rm -rfv "${FOLDER_BASE}/${FOLDER_NAME}"

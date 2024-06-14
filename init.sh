@@ -8,7 +8,7 @@ FOLDER_BATCH="terraform_batch"
 ##-----------------------------------------##
 ##--- Variabel yang perlu dirubah ---##
 # Jumlah total VM yang ingin dibuat
-TOTAL_VM=18
+TOTAL_VM=1
 ##-----------------------------------------##
 
 # Hitung jumlah batch yang diperlukan
