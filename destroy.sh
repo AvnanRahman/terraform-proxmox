@@ -8,11 +8,14 @@ FOLDER_BATCH="terraform_batch"
 ##-----------------------------------------##
 ##--- Variabel yang perlu dirubah ---##
 # Jumlah total VM yang sudah dibuat
-TOTAL_VM=18
+TOTAL_VM=1
 # Variabel VM
 VM_NAME="vm-batch"
 VM_ID=200
 VM_IP=100 # Digit ke-4 dari network IP
+VM_CORE=1
+VM_MEMORY=512 # Dalam satuan MB
+VM_DISK=10 # Dalam satuan GB
 ##-----------------------------------------##
 
 # Hitung jumlah batch yang diperlukan
@@ -44,7 +47,7 @@ do
   cd "${FOLDER_BASE}/${FOLDER_NAME}"
 
   # Jalankan terraform apply dengan variabel yang ditetapkan dari baris perintah
-  terraform destroy --auto-approve -var "instance_name=${VM_BATCH_NAME}" -var "vm_count=${VM_BATCH_COUNT}" -var "vm_id=${VM_BATCH_ID}" -var "vm_ip=${VM_BATCH_IP}" -var "batch=${i}"
+  terraform destroy --auto-approve -var "instance_name=${VM_BATCH_NAME}" -var "vm_count=${VM_BATCH_COUNT}" -var "vm_id=${VM_BATCH_ID}" -var "vm_ip=${VM_BATCH_IP}" -var "batch=${i}" -var "vm_cpu=${VM_CORE}" -var "vm_memory=${VM_MEMORY}" -var "vm_disk=${VM_DISK}"
 
   # Cleanup Folder
   rm -rfv "${FOLDER_BASE}/${FOLDER_NAME}"

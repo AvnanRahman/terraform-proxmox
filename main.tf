@@ -25,12 +25,12 @@ resource "proxmox_vm_qemu" "auto-vm" {
     agent = 1
     
     # VM CPU Settings
-    cores = 1
+    cores = var.vm_cpu
     sockets = 1
     cpu = "kvm64"    
     
     # VM Memory Settings
-    memory = 512
+    memory = var.vm_memory
 
     # VM Network Settings
     network {
@@ -50,7 +50,7 @@ resource "proxmox_vm_qemu" "auto-vm" {
       scsi {
         scsi0 {
             disk {
-            size = 10
+            size = var.vm_disk
             storage = "local-lvm"
           }
         }
@@ -100,5 +100,5 @@ resource "local_file" "vm_info" {
     for vm in proxmox_vm_qemu.auto-vm : format("Hostname: %s, IP: %s, Node: %s, Password: %s", 
     vm.name, vm.default_ipv4_address, vm.target_node, vm.cipassword)
   ])
-  filename = "/home/ubuntu/terraform-proxmox/${var.batch}/vm_info.txt"
+  filename = "/home/ubuntu/terraform-proxmox/terraform_batch_${var.batch}/vm_info.txt"
 }

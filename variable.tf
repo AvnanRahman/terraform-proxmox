@@ -16,6 +16,21 @@ variable "batch" {
   type = number
 }
 
+variable "vm_cpu" {
+  type = number
+  description = "Masukkan jumlah vCPU"
+}
+
+variable "vm_memory" {
+  type = number
+  description = "Masukkan jumlah memory dalam satuan MB"
+}
+
+variable "vm_disk" {
+  type = number
+  description = "Masukkan jumlah storage dalam satuan GB"
+}
+
 variable "ci_user" {
   type = string
 }

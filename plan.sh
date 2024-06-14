@@ -13,6 +13,9 @@ TOTAL_VM=18
 VM_NAME="vm-batch"
 VM_ID=200
 VM_IP=100 # Digit ke-4 dari network IP
+VM_CORE=1
+VM_MEMORY=512 # Dalam satuan MB
+VM_DISK=10 # Dalam satuan GB
 ##-----------------------------------------##
 
 # Hitung jumlah batch yang diperlukan
@@ -44,5 +47,5 @@ do
   cd "${FOLDER_BASE}/${FOLDER_NAME}"
 
   # Jalankan terraform apply dengan variabel yang ditetapkan dari baris perintah
-  terraform plan -var "instance_name=${VM_BATCH_NAME}" -var "vm_count=${VM_BATCH_COUNT}" -var "vm_id=${VM_BATCH_ID}" -var "vm_ip=${VM_BATCH_IP}" -var "batch=${i}"
+  terraform plan -var "instance_name=${VM_BATCH_NAME}" -var "vm_count=${VM_BATCH_COUNT}" -var "vm_id=${VM_BATCH_ID}" -var "vm_ip=${VM_BATCH_IP}" -var "batch=${i}" -var "vm_cpu=${VM_CORE}" -var "vm_memory=${VM_MEMORY}" -var "vm_disk=${VM_DISK}"
 done
